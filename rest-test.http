@@ -1,0 +1,4 @@
+# requests.http
+
+### Get all coffee drinkers
+GET http://eldo:8000/crew
