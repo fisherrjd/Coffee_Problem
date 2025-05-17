@@ -26,7 +26,6 @@ class DrinkerCreate(DrinkerBase):
     pass
 
 class DrinkerUpdate(BaseModel):
-    name: Optional[str] = None
     favorite_drink_cost: Optional[float] = None
     favorite_drink_name: Optional[str] = None
 
@@ -67,7 +66,7 @@ def find_drinker(drinker_id: int):
 def find_drinker_name(drinker_name: str):
     data = read_data()
     for d in data["drinkers"]:
-        if d["name"] == drinker_name:
+        if d["name"].lower() == drinker_name.lower():
             return d
     return None
 
@@ -76,13 +75,14 @@ def initialize_data():
     if not os.path.exists(DATA_FILE):
         default_data = {
             "drinkers": [
-                {"id": 1, "name": "Bob", "favorite_drink_cost": 4.5, "favorite_drink_name": "Cappuccino", "total_paid_into_pot": 0, "total_person_drinks_cost": 0},
-                {"id": 2, "name": "Jeremy", "favorite_drink_cost": 2.5, "favorite_drink_name": "Black Coffee", "total_paid_into_pot": 0, "total_person_drinks_cost": 0},
+                {"id": 1, "name": "Bob", "favorite_drink_cost": 4.50, "favorite_drink_name": "Cappuccino", "total_paid_into_pot": 0, "total_person_drinks_cost": 0},
+                {"id": 2, "name": "Jeremy", "favorite_drink_cost": 2.50, "favorite_drink_name": "Black Coffee", "total_paid_into_pot": 0, "total_person_drinks_cost": 0},
                 {"id": 3, "name": "Jenna", "favorite_drink_cost": 3.75, "favorite_drink_name": "Latte", "total_paid_into_pot": 0, "total_person_drinks_cost": 0},
-                {"id": 4, "name": "Jade", "favorite_drink_cost": 3.0, "favorite_drink_name": "Black Cold brew", "total_paid_into_pot": 0, "total_person_drinks_cost": 0},
-                {"id": 5, "name": "Kim", "favorite_drink_cost": 4.0, "favorite_drink_name": "Mocha", "total_paid_into_pot": 0, "total_person_drinks_cost": 0},
-                {"id": 6, "name": "Colette", "favorite_drink_cost": 3.5, "favorite_drink_name": "Flat White", "total_paid_into_pot": 0, "total_person_drinks_cost": 0},
-                {"id": 7, "name": "David", "favorite_drink_cost": 4.25, "favorite_drink_name": "Macchiato", "total_paid_into_pot": 0, "total_person_drinks_cost": 0}
+                {"id": 4, "name": "Kim", "favorite_drink_cost": 4.00, "favorite_drink_name": "Mocha", "total_paid_into_pot": 0, "total_person_drinks_cost": 0},
+                {"id": 5, "name": "Colette", "favorite_drink_cost": 3.50, "favorite_drink_name": "Flat White", "total_paid_into_pot": 0, "total_person_drinks_cost": 0},
+                {"id": 6, "name": "David", "favorite_drink_cost": 4.25, "favorite_drink_name": "Macchiato", "total_paid_into_pot": 0, "total_person_drinks_cost": 0},
+                {"id": 7, "name": "Jade", "favorite_drink_cost": 3.00, "favorite_drink_name": "Black Cold brew", "total_paid_into_pot": 0, "total_person_drinks_cost": 0},
+                
             ],
             "rounds": []
         }
@@ -96,9 +96,16 @@ def get_drinkers():
     data = read_data()
     return data["drinkers"]
 
-@app.get("/drinkers/{drinker_id}", response_model=Drinker)
+@app.get("/drinker/id/{drinker_id}", response_model=Drinker)
 def get_drinker(drinker_id: int):
     drinker = find_drinker(drinker_id)
+    if not drinker:
+        raise HTTPException(status_code=404, detail="Drinker not found")
+    return drinker
+
+@app.get("/drinker/name/{drinker_name}", response_model=Drinker)
+def get_drinker(drinker_name: str):
+    drinker = find_drinker_name(drinker_name)
     if not drinker:
         raise HTTPException(status_code=404, detail="Drinker not found")
     return drinker
@@ -106,10 +113,14 @@ def get_drinker(drinker_id: int):
 @app.post("/drinkers", response_model=Drinker, status_code=201)
 def create_drinker(drinker: DrinkerCreate):
     data = read_data()
+    # Check for existing drinker with the same name (case-insensitive)
+    for d in data["drinkers"]:
+        if d["name"].lower() == drinker.name.lower():
+            raise HTTPException(status_code=400, detail="Drinker with this name already exists")
     new_id = max((d["id"] for d in data["drinkers"]), default=0) + 1
     new_drinker = {
         "id": new_id,
-        "name": drinker.name,
+        "name": drinker.name,  # Store name in lowercase
         "favorite_drink_cost": drinker.favorite_drink_cost,
         "favorite_drink_name": drinker.favorite_drink_name,
         "total_paid_into_pot": 0,

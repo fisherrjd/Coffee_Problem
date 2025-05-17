@@ -4,7 +4,10 @@
 GET http://coffee.jade.rip/drinkers
 
 ### Get Coffee Drinker by ID
-GET http://coffee.jade.rip/drinkers/1
+GET http://coffee.jade.rip/drinker/id/1
+
+### Get Coffee Drinker by name
+GET http://coffee.jade.rip/drinker/name/max
 
 
 ### Post a new coffee drinker
@@ -12,12 +15,12 @@ POST http://coffee.jade.rip/drinkers
 Content-Type: application/json
 
   {
-    "name": "Max",
+    "name": "Johnny",
     "favorite_drink_cost": 3.25,
     "favorite_drink_name": "White Mocha"
   }
 ### Update a coffee drinker
-PUT http://coffee.jade.rip/drinkers/2
+PUT http://coffee.jade.rip/drinkers/7
 Content-Type: application/json
 
   {
@@ -25,7 +28,7 @@ Content-Type: application/json
     "favorite_drink_name": "White Mocha"
   }
 ### Delete a coffee drinker
-DELETE http://coffee.jade.rip/drinkers/2
+DELETE http://coffee.jade.rip/drinkers/8
 
 ### Post reset all coffee drinkers balances
 POST http://coffee.jade.rip/reset-balances
