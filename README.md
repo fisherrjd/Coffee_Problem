@@ -12,11 +12,27 @@ A web app and API to help a group of coffee drinkers fairly decide whose turn it
 
 - Visit [https://coffee.jade.rip/](https://coffee.jade.rip/) to use the app instantly in your browser.
 
+#### **Run with Docker (Alternative)**
+
+1. Build the Docker image:
+
+   ```sh
+   docker build -t coffee-order .
+   ```
+
+2. Run the app:
+
+   ```sh
+   docker run -p 8000:8000 coffee-order
+   ```
+
+3. Open [http://localhost:8000](http://localhost:8000) in your browser.
+
 #### **Requirements (for local development)**
 
-- TODO:
-  - Nix version?
-  - regular pip / uv
+- Python 3.13 (see `.python-version`)
+- Nix (optional, for reproducible setup)
+- Or use `pip` / `uv` to install dependencies
 
 ---
 
@@ -53,7 +69,10 @@ A web app and API to help a group of coffee drinkers fairly decide whose turn it
 
 ### 4. Running the Solution Locally or Online
 
-- **Data Persistence:** All data is stored in `coffee_pot.json` in the project directory. To reset, simply delete this file and restart the app.
+- **Data Persistence:**  
+  By default, all data is stored in `coffee_pot.json` in the project directory. This is suitable for proof-of-concept and small group use.  
+  **For production or larger groups, you should migrate to a real database**
+  To reset the current data, simply delete `coffee_pot.json` and restart the app.
 
 ---
 
