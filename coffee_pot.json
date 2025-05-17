@@ -1,0 +1,61 @@
+{
+  "drinkers": [
+    {
+      "id": 1,
+      "name": "Bob",
+      "favorite_drink_cost": 4.5,
+      "favorite_drink_name": "Cappuccino",
+      "total_paid_into_pot": 0,
+      "total_person_drinks_cost": 0
+    },
+    {
+      "id": 2,
+      "name": "Jeremy",
+      "favorite_drink_cost": 2.5,
+      "favorite_drink_name": "Black Coffee",
+      "total_paid_into_pot": 0,
+      "total_person_drinks_cost": 0
+    },
+    {
+      "id": 3,
+      "name": "Jenna",
+      "favorite_drink_cost": 3.75,
+      "favorite_drink_name": "Latte",
+      "total_paid_into_pot": 0,
+      "total_person_drinks_cost": 0
+    },
+    {
+      "id": 4,
+      "name": "Kim",
+      "favorite_drink_cost": 4.0,
+      "favorite_drink_name": "Mocha",
+      "total_paid_into_pot": 0,
+      "total_person_drinks_cost": 0
+    },
+    {
+      "id": 5,
+      "name": "Colette",
+      "favorite_drink_cost": 3.5,
+      "favorite_drink_name": "Flat White",
+      "total_paid_into_pot": 0,
+      "total_person_drinks_cost": 0
+    },
+    {
+      "id": 6,
+      "name": "David",
+      "favorite_drink_cost": 4.25,
+      "favorite_drink_name": "Macchiato",
+      "total_paid_into_pot": 0,
+      "total_person_drinks_cost": 0
+    },
+    {
+      "id": 7,
+      "name": "Jade",
+      "favorite_drink_cost": 3.0,
+      "favorite_drink_name": "Black Cold brew",
+      "total_paid_into_pot": 0,
+      "total_person_drinks_cost": 0
+    }
+  ],
+  "rounds": []
+}
