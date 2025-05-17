@@ -10,7 +10,7 @@ A web app and API to help a group of coffee drinkers fairly decide whose turn it
 
 #### **Preferred: Try It Online**
 
-- Visit [https://coffee.jade.rip/](https://coffee.jade.rip/) to use the app instantly in your browser.
+- Visit [https://bertram.jade.rip/](https://bertram.jade.rip/) to use the app instantly in your browser.
 
 #### **Run with Docker (Alternative)**
 
