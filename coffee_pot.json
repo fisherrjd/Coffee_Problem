@@ -5,56 +5,56 @@
       "name": "Bob",
       "favorite_drink_cost": 4.5,
       "favorite_drink_name": "Cappuccino",
-      "total_paid_into_pot": 28.5,
-      "total_person_drinks_cost": 4.5
+      "total_paid_into_pot": 51.0,
+      "total_person_drinks_cost": 54.0
     },
     {
       "id": 2,
       "name": "Jeremy",
-      "favorite_drink_cost": 5.5,
+      "favorite_drink_cost": 2.5,
       "favorite_drink_name": "Black Coffee",
-      "total_paid_into_pot": 0.0,
-      "total_person_drinks_cost": 5.5
+      "total_paid_into_pot": 25.5,
+      "total_person_drinks_cost": 30.0
     },
     {
       "id": 3,
       "name": "Jenna",
       "favorite_drink_cost": 3.75,
       "favorite_drink_name": "Latte",
-      "total_paid_into_pot": 0.0,
-      "total_person_drinks_cost": 3.75
+      "total_paid_into_pot": 51.0,
+      "total_person_drinks_cost": 45.0
     },
     {
       "id": 4,
       "name": "Kim",
       "favorite_drink_cost": 4.0,
       "favorite_drink_name": "Mocha",
-      "total_paid_into_pot": 0.0,
-      "total_person_drinks_cost": 4.0
+      "total_paid_into_pot": 51.0,
+      "total_person_drinks_cost": 48.0
     },
     {
       "id": 5,
       "name": "Colette",
       "favorite_drink_cost": 3.5,
       "favorite_drink_name": "Flat White",
-      "total_paid_into_pot": 0.0,
-      "total_person_drinks_cost": 3.5
+      "total_paid_into_pot": 51.0,
+      "total_person_drinks_cost": 42.0
     },
     {
       "id": 6,
       "name": "David",
       "favorite_drink_cost": 4.25,
       "favorite_drink_name": "Macchiato",
-      "total_paid_into_pot": 0.0,
-      "total_person_drinks_cost": 4.25
+      "total_paid_into_pot": 51.0,
+      "total_person_drinks_cost": 51.0
     },
     {
       "id": 7,
       "name": "Jade",
       "favorite_drink_cost": 3.0,
       "favorite_drink_name": "Black Cold brew",
-      "total_paid_into_pot": 0.0,
-      "total_person_drinks_cost": 3.0
+      "total_paid_into_pot": 25.5,
+      "total_person_drinks_cost": 36.0
     }
   ],
   "rounds": [
@@ -218,6 +218,90 @@
       "payer_id": 1,
       "payer_name": "Bob",
       "total_cost": 28.5
+    },
+    {
+      "id": 24,
+      "timestamp": "2025-05-17T13:19:51.508704",
+      "payer_id": 1,
+      "payer_name": "Bob",
+      "total_cost": 25.5
+    },
+    {
+      "id": 25,
+      "timestamp": "2025-05-17T13:19:52.910095",
+      "payer_id": 6,
+      "payer_name": "David",
+      "total_cost": 25.5
+    },
+    {
+      "id": 26,
+      "timestamp": "2025-05-17T13:19:55.829173",
+      "payer_id": 4,
+      "payer_name": "Kim",
+      "total_cost": 25.5
+    },
+    {
+      "id": 27,
+      "timestamp": "2025-05-17T13:19:56.402542",
+      "payer_id": 3,
+      "payer_name": "Jenna",
+      "total_cost": 25.5
+    },
+    {
+      "id": 28,
+      "timestamp": "2025-05-17T13:19:56.987659",
+      "payer_id": 5,
+      "payer_name": "Colette",
+      "total_cost": 25.5
+    },
+    {
+      "id": 29,
+      "timestamp": "2025-05-17T13:19:57.531208",
+      "payer_id": 7,
+      "payer_name": "Jade",
+      "total_cost": 25.5
+    },
+    {
+      "id": 30,
+      "timestamp": "2025-05-17T13:19:58.268532",
+      "payer_id": 2,
+      "payer_name": "Jeremy",
+      "total_cost": 25.5
+    },
+    {
+      "id": 31,
+      "timestamp": "2025-05-17T13:19:58.433332",
+      "payer_id": 1,
+      "payer_name": "Bob",
+      "total_cost": 25.5
+    },
+    {
+      "id": 32,
+      "timestamp": "2025-05-17T13:19:58.578362",
+      "payer_id": 6,
+      "payer_name": "David",
+      "total_cost": 25.5
+    },
+    {
+      "id": 33,
+      "timestamp": "2025-05-17T13:19:58.731551",
+      "payer_id": 4,
+      "payer_name": "Kim",
+      "total_cost": 25.5
+    },
+    {
+      "id": 34,
+      "timestamp": "2025-05-17T13:19:58.871167",
+      "payer_id": 3,
+      "payer_name": "Jenna",
+      "total_cost": 25.5
+    },
+    {
+      "id": 35,
+      "timestamp": "2025-05-17T13:19:59.001532",
+      "payer_id": 5,
+      "payer_name": "Colette",
+      "total_cost": 25.5
     }
   ]
 }

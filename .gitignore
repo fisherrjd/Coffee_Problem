@@ -2,6 +2,9 @@
 .direnv
 result*
 
+#data json
+coffee_pot.json
+
 # python
 .mypy_cache
 .ruff_cache

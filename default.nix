@@ -7,7 +7,7 @@
     { }
 }:
 let
-  name = "bertram_interview_question";
+  name = "coffee_order";
 
   uvEnv = pkgs.uv-nix.mkEnv {
     inherit name; python = pkgs.python313;
