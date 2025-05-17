@@ -1,0 +1,459 @@
+body {
+    font-family: 'Quicksand', 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at top left, #f9e7d2 60%, #e7c8a0 100%);
+    color: #3e2c23;
+    background-image:
+        url('https://www.transparenttextures.com/patterns/coffee-beans.png '),
+        radial-gradient(ellipse at top left, #f9e7d2 60%, #e7c8a0 100%);
+    background-repeat: repeat, no-repeat;
+    background-size: 200px 200px, cover;
+}
+
+h2 {
+    color: #6b4f44;
+    border-bottom: 2px solid #d8c6b8;
+    padding-bottom: 0.3em;
+    margin-top: 0;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 1.5rem;
+    transition: color 0.2s ease;
+}
+
+/* Grid layout for all sections */
+.sections-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 2em;
+    margin: 2em;
+    padding: 0 1rem;
+}
+
+.sections-grid>div {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    height: auto;
+    align-items: stretch;
+}
+
+.left-col,
+.right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-self: flex-start;
+    flex: 0 0 auto;
+    grid-row: 1 / span 2;
+}
+
+.left-col {
+    grid-column: 1;
+}
+
+.right-col {
+    grid-column: 3;
+}
+
+.center-col {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+}
+
+.section {
+    background: #fff8f2;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #e7c8a055;
+    margin-bottom: 1.5em;
+    padding: 1.5em;
+    border-left: 8px solid #a8765c;
+    min-width: 0;
+    max-width: 100%;
+    transition: box-shadow 0.3s ease;
+    box-sizing: border-box;
+    flex: 1 1 0;
+    width: 100%;
+}
+
+.stack-top {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+.stack-bottom {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+    margin-top: 0;
+    box-shadow: none;
+}
+
+.sections-grid>div>.section:first-child.stack-top {
+    border-top-left-radius: 18px !important;
+    border-top-right-radius: 18px !important;
+}
+
+.sections-grid>div>.section:last-child.stack-bottom {
+    border-bottom-left-radius: 18px !important;
+    border-bottom-right-radius: 18px !important;
+}
+
+/* Drinker list styling */
+.drinker-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 75vh;
+    overflow-y: auto;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 8px #e7c8a055;
+    max-width: 100vw;
+    overflow-x: auto;
+}
+
+.drinker-list li {
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 8px;
+    background: #f9e7d2;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    word-break: break-word;
+}
+
+.drinker-list li:hover {
+    background-color: #f7eee5;
+    transform: scale(1.01);
+}
+
+.drinker-list li.next-to-pay {
+    box-shadow: 0 0 0 4px #ffe066, 0 1px 3px #e7c8a0a0;
+    border: 2px solid #ffe066;
+    background: #fffbe6 !important;
+    position: relative;
+    z-index: 1;
+}
+
+.drinker-list strong {
+    color: #7a4b2a;
+    font-size: 1.08em;
+}
+
+.drinker-list span.balance.green {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.drinker-list span.balance.red {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    max-width: 100%;
+}
+
+input,
+button {
+    padding: 0.7em;
+    font-size: 1em;
+    border-radius: 8px;
+    border: 1px solid #bfa07a;
+    outline: none;
+    transition: all 0.3s ease;
+    background: #f9f6f1;
+}
+
+input:focus {
+    border-color: #a8765c;
+    background-color: #fff3eb;
+    box-shadow: 0 0 0 3px #a8765c33;
+}
+
+button {
+    background: linear-gradient(to right, #a8765c, #8d5e47);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 6px rgba(80, 50, 30, 0.10);
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(to right, #8d5e47, #724938);
+}
+
+/* Result messages */
+.success {
+    color: green;
+    font-weight: 500;
+}
+
+.error {
+    color: red;
+    font-weight: 500;
+}
+
+/* Highlight for next to pay in list */
+.drinker-list .next-to-pay {
+    box-shadow: 0 0 0 4px #ffe066, 0 1px 3px #e7c8a0a0 !important;
+    border: 2px solid #ffe066 !important;
+    background: #fffbe6 !important;
+}
+
+/* Stack effect for left and right columns */
+.stack-top {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    margin-bottom: 0 !important;
+}
+
+.stack-bottom {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-top: none !important;
+    margin-top: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Modal styles */
+.modal-bg {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(40, 30, 20, 0.5);
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    background: #fff8f2;
+    color: #3e2c23;
+    max-width: 95vw;
+    width: 400px;
+    margin: 10vh auto 0 auto;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px #a8765c44;
+    padding: 2em 1.5em 1.5em 1.5em;
+    position: relative;
+    animation: fadeInUp 0.3s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: #a8765c;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.modal-close:hover {
+    transform: rotate(90deg);
+}
+
+.highlight-tip {
+    color: #bfa100;
+}
+
+.highlight-info {
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.highlight-dot {
+    background: #fffbe6;
+    color: #bfa100;
+    border-radius: 50%;
+    padding: 0.2em 0.6em;
+    border: 2px solid #ffe066;
+    font-weight: bold;
+    margin-right: 0.5em;
+    vertical-align: middle;
+}
+
+.balance {
+    font-weight: bold;
+}
+
+.info-btn {
+    position: fixed;
+    bottom: 1.5em;
+    right: 1.5em;
+    background: #a8765c;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    font-size: 1.5em;
+    box-shadow: 0 2px 8px #a8765c55;
+    cursor: pointer;
+    z-index: 999;
+    transition: background 0.2s ease;
+}
+
+.info-btn:hover {
+    background: #94644b;
+}
+
+/* Ensure modal and floating button are always visible */
+#info-modal {
+    width: 100vw !important;
+    height: 100vh !important;
+    left: 0 !important;
+    top: 0 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    box-sizing: border-box;
+}
+
+#open-modal {
+    right: 1em !important;
+    bottom: 1em !important;
+    width: 2.7em !important;
+    height: 2.7em !important;
+    font-size: 1.2em !important;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .sections-grid {
+        grid-template-columns: 1fr;
+        gap: 1em;
+        margin: 1em;
+    }
+
+    .left-col,
+    .center-col,
+    .right-col {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+        width: 100%;
+        max-width: 100vw;
+    }
+
+    .section {
+        margin-bottom: 1em;
+        padding: 1em;
+    }
+
+    .modal-content {
+        width: 95vw;
+        padding: 1.2em 0.7em 1em 0.7em;
+    }
+
+    .info-btn {
+        right: 1em;
+        bottom: 1em;
+        width: 2.5em;
+        height: 2.5em;
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 1em;
+        padding: 0;
+    }
+
+    .sections-grid {
+        grid-template-columns: 1fr;
+        margin: 0.5em;
+        gap: 0.5em;
+    }
+
+    .section {
+        padding: 0.7em;
+        margin-bottom: 0.7em;
+        border-left: 4px solid #a8765c;
+    }
+
+    .modal-content {
+        width: 98vw;
+        min-width: 0;
+        padding: 0.7em 0.3em 0.7em 0.3em;
+        font-size: 1em;
+    }
+
+    h2 {
+        font-size: 1.1em;
+        padding-bottom: 0.2em;
+    }
+
+    .drinker-list li {
+        padding: 0.7em;
+        font-size: 0.98em;
+    }
+
+    .info-btn {
+        width: 2.2em;
+        height: 2.2em;
+        font-size: 1em;
+        bottom: 0.7em;
+        right: 0.7em;
+    }
+
+    input,
+    button {
+        font-size: 1em;
+        padding: 0.5em;
+    }
+}
+
+@media (max-width: 600px) {
+
+    form,
+    .drinker-list {
+        width: 100%;
+        max-width: 100vw;
+    }
+
+    .drinker-list {
+        max-height: 40vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        margin: 5vh auto 0 auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}

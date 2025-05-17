@@ -1,17 +1,24 @@
-# main.py - Stage 1: Backend API Only
-
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from typing import List, Optional
 import json
 import os
 from datetime import datetime
+from fastapi.staticfiles import StaticFiles
 
+# === FastAPI Setup ===
 app = FastAPI(
     title="Bertram Labs Coffee Pot API",
     description="API to determine whose turn it is to pay for coffee.",
     version="1.0.0"
 )
+
+# === Jinja2 template init ===
+
+templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 DATA_FILE = "coffee_pot.json"
 
@@ -89,6 +96,8 @@ def get_next_payer_dict(data):
         key=lambda d: d["total_paid_into_pot"] - d["total_person_drinks_cost"]
     )
 
+# === startup ===
+
 @app.on_event("startup")
 def initialize_data():
     if not os.path.exists(DATA_FILE):
@@ -109,6 +118,14 @@ def initialize_data():
         print("Initialized default data in coffee_pot.json")
 
 # === Routes ===
+
+@app.get("/", response_class=HTMLResponse)
+def home(request: Request):
+    data = read_data()
+    return templates.TemplateResponse(
+        "index.html",
+        {"request": request, "drinkers": data["drinkers"]}
+    )
 
 @app.get("/drinkers", response_model=List[Drinker])
 def get_drinkers():

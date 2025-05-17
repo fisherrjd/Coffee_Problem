@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Coffee Pot - Drinkers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <!-- Info Modal -->
+    <div id="info-modal" class="modal-bg">
+        <div class="modal-content">
+            <button id="close-modal" class="modal-close">&times;</button>
+            <h2 style="margin-top:0;">☕ Coffee Pot App</h2>
+            <p>
+                <b>What does this app do?</b><br>
+                Given a group of coffee drinkers, this app helps determine fairly who should pay for the next round if
+                only one person pays at a time.<br><br>
+                <b>How it works:</b>
+            <ul style="margin-left:1.2em;">
+                <li>Add everyone and their favorite drink.</li>
+                <li>Record a round when someone pays for coffee. The app tracks balances and always shows who should pay
+                    next (yellow highlight).</li>
+                <li>Update drinkers or reset balances as needed.</li>
+            </ul>
+            <b>Tip:</b> Tap a drinker to quickly update their info.<br>
+            <span class="highlight-tip">Yellow highlight</span> = next to pay!
+            </p>
+        </div>
+    </div>
+
+    <div class="sections-grid">
+        <!-- Left column: Record + Add -->
+        <div class="left-col">
+            <div class="section stack-top minimal">
+                <h2>Record a Coffee Round</h2>
+                <form id="coffee-round-form">
+                    <button type="submit">Record Round</button>
+                </form>
+                <div id="coffee-round-result"></div>
+            </div>
+            <div class="section stack-bottom">
+                <h2>Add a New Drinker</h2>
+                <form id="add-drinker-form">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="text" name="favorite_drink_name" placeholder="Favorite Drink Name" required>
+                    <input type="number" step="0.01" name="favorite_drink_cost" placeholder="Favorite Drink Cost" required>
+                    <button type="submit">Add Drinker</button>
+                </form>
+                <div id="add-drinker-result"></div>
+            </div>
+        </div>
+
+        <!-- Center column: Drinkers -->
+        <div class="section center-col">
+            <h2>Coffee Crew</h2>
+            <div class="highlight-info">
+                <span class="highlight-dot">&#9679;</span>
+                <span style="font-weight: 500;">Yellow highlight = Next to pay</span>
+            </div>
+            <ul class="drinker-list" id="drinker-list">
+                {% for drinker in drinkers %}
+                {% set balance = drinker.total_paid_into_pot - drinker.total_person_drinks_cost %}
+                {% set is_next = next_payer and drinker.name == next_payer.name %}
+                <li data-name="{{ drinker.name }}" data-favorite-drink-name="{{ drinker.favorite_drink_name }}"
+                    data-favorite-drink-cost="{{ '%.2f' | format(drinker.favorite_drink_cost) }}"
+                    class="{% if is_next %}next-to-pay{% endif %}">
+                    <strong>{{ drinker.name }}</strong>
+                    (Favorite: {{ drinker.favorite_drink_name }} – ${{ '%.2f' | format(drinker.favorite_drink_cost) }})
+                    <br>
+                    Paid: ${{ '%.2f' | format(drinker.total_paid_into_pot) }},
+                    Consumed: ${{ '%.2f' | format(drinker.total_person_drinks_cost) }}
+                    <br>
+                    <span class="balance" style="color: {{ 'green' if balance >= 0 else 'red' }};">
+                        Balance: ${{ '%.2f' | format(balance) }}
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Right column: Reset + Update -->
+        <div class="right-col">
+            <div class="section stack-top minimal">
+                <h2>Reset All Balances</h2>
+                <form id="reset-balances-form">
+                    <button type="submit">Reset Balances</button>
+                </form>
+                <div id="reset-balances-result"></div>
+            </div>
+            <div class="section stack-bottom">
+                <h2>Update Drinker</h2>
+                <form id="update-drinker-form">
+                    <input type="text" name="name" placeholder="Drinker Name" required>
+                    <input type="text" name="favorite_drink_name" placeholder="New Favorite Drink Name (optional)">
+                    <input type="number" step="0.01" name="favorite_drink_cost" placeholder="New Favorite Drink Cost (optional)">
+                    <button type="submit">Update Drinker</button>
+                </form>
+                <div id="update-drinker-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <button id="open-modal" class="info-btn">?</button>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
