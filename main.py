@@ -33,9 +33,19 @@ class Drinker(DrinkerBase):
     id: int
     total_paid_into_pot: float
     total_person_drinks_cost: float
+    balance_owed: float
 
-    class Config:
-        from_attributes = True
+    @staticmethod
+    def from_dict(d: dict):
+        return Drinker(
+            id=d["id"],
+            name=d["name"].title(),
+            favorite_drink_cost=d["favorite_drink_cost"],
+            favorite_drink_name=d["favorite_drink_name"],
+            total_paid_into_pot=d["total_paid_into_pot"],
+            total_person_drinks_cost=d["total_person_drinks_cost"],
+            balance_owed=round(d["total_person_drinks_cost"] - d["total_paid_into_pot"], 2)
+        )
 
 class CoffeeRoundResponse(BaseModel):
     message: str
@@ -70,6 +80,15 @@ def find_drinker_name(drinker_name: str):
             return d
     return None
 
+def get_next_payer_dict(data):
+    drinkers = data["drinkers"]
+    if not drinkers:
+        return None
+    return min(
+        drinkers,
+        key=lambda d: d["total_paid_into_pot"] - d["total_person_drinks_cost"]
+    )
+
 @app.on_event("startup")
 def initialize_data():
     if not os.path.exists(DATA_FILE):
@@ -94,21 +113,21 @@ def initialize_data():
 @app.get("/drinkers", response_model=List[Drinker])
 def get_drinkers():
     data = read_data()
-    return data["drinkers"]
+    return [Drinker.from_dict(d) for d in data["drinkers"]]
 
 @app.get("/drinker/id/{drinker_id}", response_model=Drinker)
 def get_drinker(drinker_id: int):
     drinker = find_drinker(drinker_id)
     if not drinker:
         raise HTTPException(status_code=404, detail="Drinker not found")
-    return drinker
+    return Drinker.from_dict(drinker)
 
 @app.get("/drinker/name/{drinker_name}", response_model=Drinker)
 def get_drinker(drinker_name: str):
     drinker = find_drinker_name(drinker_name)
     if not drinker:
         raise HTTPException(status_code=404, detail="Drinker not found")
-    return drinker
+    return Drinker.from_dict(drinker)
 
 @app.post("/drinkers", response_model=Drinker, status_code=201)
 def create_drinker(drinker: DrinkerCreate):
@@ -124,13 +143,14 @@ def create_drinker(drinker: DrinkerCreate):
         "favorite_drink_cost": drinker.favorite_drink_cost,
         "favorite_drink_name": drinker.favorite_drink_name,
         "total_paid_into_pot": 0,
-        "total_person_drinks_cost": 0
+        "total_person_drinks_cost": 0,
+        "balance_owed": 0.0
     }
     data["drinkers"].append(new_drinker)
     write_data(data)
     return new_drinker
 
-@app.put("/drinkers/{drinker_id}", response_model=Drinker)
+@app.put("/drinkers/{drinker_id}", response_model=DrinkerBase)
 def update_drinker(drinker_id: int, updated_drinker: DrinkerUpdate):
     data = read_data()
     for d in data["drinkers"]:
@@ -165,22 +185,15 @@ def reset_all_balances():
 @app.post("/coffee-rounds", response_model=CoffeeRoundResponse)
 def record_coffee_round():
     data = read_data()
-
-    lowest_balance = float('inf')
-    selected_payer = None
-    for d in data["drinkers"]:
-        pot_balance = d["total_paid_into_pot"] - d["total_person_drinks_cost"]
-        if pot_balance < lowest_balance:
-            lowest_balance = pot_balance
-            selected_payer = d
-
+    selected_payer = get_next_payer_dict(data)
     if not selected_payer:
         raise HTTPException(status_code=500, detail="Could not determine a payer")
 
     payer_id = selected_payer["id"]
-    payer_name = selected_payer["name"]
+    payer_name = selected_payer["name"].title()
     total_cost = sum(d["favorite_drink_cost"] for d in data["drinkers"])
 
+    # Update balances
     for d in data["drinkers"]:
         if d["id"] == payer_id:
             d["total_paid_into_pot"] += total_cost
@@ -195,12 +208,15 @@ def record_coffee_round():
     }
     data["rounds"].append(round_entry)
 
-    next_payer = min(
-        data["drinkers"],
-        key=lambda d: d["total_paid_into_pot"] - d["total_person_drinks_cost"]
-    )
+    # Determine the next payer after this round
+    next_payer = get_next_payer_dict(data)
 
     write_data(data)
+
+    # Compute lowest balance for next payer
+    lowest_balance = round(
+        next_payer["total_paid_into_pot"] - next_payer["total_person_drinks_cost"], 2
+    )
 
     return {
         "message": "Coffee round recorded successfully",
@@ -211,22 +227,18 @@ def record_coffee_round():
             "payer_name": payer_name,
             "total_cost": total_cost,
             "next_payer_id": next_payer["id"],
-            "next_payer_name": next_payer["name"],
-            "lowest_balance": next_payer["total_paid_into_pot"] - next_payer["total_person_drinks_cost"]
+            "next_payer_name": next_payer["name"].title(),
+            "lowest_balance": lowest_balance
         }
     }
 
 @app.get("/next-payer")
-def get_next_payer():
+def next_payer_endpoint():
     data = read_data()
-    drinkers = data["drinkers"]
-    if not drinkers:
+    next_payer = get_next_payer_dict(data)
+    if not next_payer:
         return {}
-    next_payer = min(
-        drinkers,
-        key=lambda d: d["total_paid_into_pot"] - d["total_person_drinks_cost"]
-    )
-    return {"name": next_payer["name"]}
+    return {"name": next_payer["name"].title()}
 
 # === Run the server ===
 

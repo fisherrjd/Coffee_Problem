@@ -7,8 +7,10 @@ GET http://coffee.jade.rip/drinkers
 GET http://coffee.jade.rip/drinker/id/1
 
 ### Get Coffee Drinker by name
-GET http://coffee.jade.rip/drinker/name/max
+GET http://coffee.jade.rip/drinker/name/Bob
 
+### Get Coffee Drinker by name
+GET http://coffee.jade.rip/drinker/name/jade
 
 ### Post a new coffee drinker
 POST http://coffee.jade.rip/drinkers
@@ -30,11 +32,17 @@ Content-Type: application/json
 ### Delete a coffee drinker
 DELETE http://coffee.jade.rip/drinkers/8
 
+### Get all coffee drinkers
+GET http://coffee.jade.rip/drinkers
+
 ### Post reset all coffee drinkers balances
 POST http://coffee.jade.rip/reset-balances
 
 ### Post a new round of drinking coffee
 POST http://coffee.jade.rip/coffee-rounds
+
+### Get all coffee drinkers
+GET http://coffee.jade.rip/drinkers
 
 ### Get the next payer
 GET http://coffee.jade.rip/next-payer
