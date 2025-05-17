@@ -1,4 +1,4 @@
-# Bertram Labs Coffee Pot App
+# Bertram Labs Coffee Order App
 
 A web app and API to help a group of coffee drinkers fairly decide whose turn it is to pay for coffee, taking into account each person's favorite drink and its cost.
 
