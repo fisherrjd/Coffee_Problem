@@ -1,48 +1,44 @@
 # requests.http
 
 ### Get all coffee drinkers
-GET http://coffee.jade.rip/drinkers
+GET http://bertram.jade.rip/drinkers
 
 ### Get Coffee Drinker by ID
-GET http://coffee.jade.rip/drinker/id/1
+GET http://bertram.jade.rip/drinker/id/1
 
-### Get Coffee Drinker by name
-GET http://coffee.jade.rip/drinker/name/Bob
+### Get Coffee Drinker by name (Bob)
+GET http://bertram.jade.rip/drinker/name/Bob
 
-### Get Coffee Drinker by name
-GET http://coffee.jade.rip/drinker/name/jade
+### Get Coffee Drinker by name (jade)
+GET http://bertram.jade.rip/drinker/name/jade
 
 ### Post a new coffee drinker
-POST http://coffee.jade.rip/drinkers
+POST http://bertram.jade.rip/drinkers
 Content-Type: application/json
 
-  {
-    "name": "Johnny",
-    "favorite_drink_cost": 3.25,
-    "favorite_drink_name": "White Mocha"
-  }
+{
+  "name": "Johnny",
+  "favorite_drink_cost": 3.25,
+  "favorite_drink_name": "White Mocha"
+}
+
 ### Update a coffee drinker
-PUT http://coffee.jade.rip/drinkers/7
+PUT http://bertram.jade.rip/drinkers/7
 Content-Type: application/json
 
-  {
-    "favorite_drink_cost": 3.25,
-    "favorite_drink_name": "White Mocha"
-  }
-### Delete a coffee drinker
-DELETE http://coffee.jade.rip/drinkers/8
+{
+  "favorite_drink_cost": 3.25,
+  "favorite_drink_name": "White Mocha"
+}
 
-### Get all coffee drinkers
-GET http://coffee.jade.rip/drinkers
+### Delete a coffee drinker
+DELETE http://bertram.jade.rip/drinkers/8
 
 ### Post reset all coffee drinkers balances
-POST http://coffee.jade.rip/reset-balances
+POST http://bertram.jade.rip/reset-balances
 
 ### Post a new round of drinking coffee
-POST http://coffee.jade.rip/coffee-rounds
-
-### Get all coffee drinkers
-GET http://coffee.jade.rip/drinkers
+POST http://bertram.jade.rip/coffee-rounds
 
 ### Get the next payer
-GET http://coffee.jade.rip/next-payer
+GET http://bertram.jade.rip/next-payer
