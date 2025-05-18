@@ -82,9 +82,9 @@ A web app and API to help a group of coffee drinkers fairly decide whose turn it
 - Uvicorn — ASGI server for running FastAPI apps
 - Jinja2 — Templating engine for HTML rendering
 - Docker — Containerization for easy deployment
-- Nix — (Optional) Reproducible development environments
 - GitHub Copilot (GPT-4.1) — AI programming assistant for code and documentation
 - Qwen 3 — Large language model used for code and content generation
+- Nix — (Optional) Reproducible development environments
 
 ---
 
