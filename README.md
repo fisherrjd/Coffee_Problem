@@ -17,13 +17,13 @@ A web app and API to help a group of coffee drinkers fairly decide whose turn it
 1. Build the Docker image:
 
    ```sh
-   docker build -t coffee-order .
+   docker build -t bertram_interview .
    ```
 
 2. Run the app:
 
    ```sh
-   docker run -p 8000:8000 coffee-order
+   docker run -p 8000:8000 bertram_interview
    ```
 
 3. Open [http://localhost:8000](http://localhost:8000) in your browser.
