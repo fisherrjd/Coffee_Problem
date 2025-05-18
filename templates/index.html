@@ -19,10 +19,10 @@
                 only one person pays at a time.<br><br>
                 <b>How it works:</b>
             <ul style="margin-left:1.2em;">
-                <li>Add everyone and their favorite drink.</li>
-                <li>Record a round when someone pays for coffee. The app tracks balances and always shows who should pay
+                <li>Record a round when its time to pay for coffee. The app tracks balances and always shows who should
+                    pay
                     next (yellow highlight).</li>
-                <li>Update drinkers or reset balances as needed.</li>
+                <li>Update drinkers expand the crew and reset the balance as needed.</li>
             </ul>
             <b>Tip:</b> Tap a drinker to quickly update their info.<br>
             <span class="highlight-tip">Yellow highlight</span> = next to pay!
@@ -45,7 +45,8 @@
                 <form id="add-drinker-form">
                     <input type="text" name="name" placeholder="Name" required>
                     <input type="text" name="favorite_drink_name" placeholder="Favorite Drink Name" required>
-                    <input type="number" step="0.01" name="favorite_drink_cost" placeholder="Favorite Drink Cost" required>
+                    <input type="number" step="0.01" name="favorite_drink_cost" placeholder="Favorite Drink Cost"
+                        required>
                     <button type="submit">Add Drinker</button>
                 </form>
                 <div id="add-drinker-result"></div>
@@ -94,7 +95,8 @@
                 <form id="update-drinker-form">
                     <input type="text" name="name" placeholder="Drinker Name" required>
                     <input type="text" name="favorite_drink_name" placeholder="New Favorite Drink Name (optional)">
-                    <input type="number" step="0.01" name="favorite_drink_cost" placeholder="New Favorite Drink Cost (optional)">
+                    <input type="number" step="0.01" name="favorite_drink_cost"
+                        placeholder="New Favorite Drink Cost (optional)">
                     <button type="submit">Update Drinker</button>
                 </form>
                 <div id="update-drinker-result"></div>
